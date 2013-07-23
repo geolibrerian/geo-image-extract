@@ -26,24 +26,23 @@ def read_exif(geodic):
     except:
         #this is dummy data - it puts the dot in the sahara desert
         dummydata = (10.552, 18.65224)
-        return tup
+        return dummydata
 
 
 
-
+# base code for this function from http://stackoverflow.com/questions/16311605/how-do-i-use-pythons-pil-library-to-get-exif-data-from-a-photo-starting-with-a
 def get_exif(filepath):
-    ret = {}
+    exif = {}
     from PIL import Image
-    i = Image.open(filepath)
-    #i = imageobject
-    info = i._getexif()
+    image = Image.open(filepath)
+    info = image._getexif()
     
     #try:
     for tag, value in info.items():
             decoded = TAGS.get(tag, tag)
-            ret[decoded] = value
+            exif[decoded] = value
    
-    return ret
+    return exif
 
 
 def generatePRJ():
